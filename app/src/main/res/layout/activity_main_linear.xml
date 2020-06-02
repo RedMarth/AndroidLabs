@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical" >
+
+    <TextView
+        android:id="@+id/myText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/GUI"
+        android:textSize="30dp"
+        />
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/clickHereButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="fill"
+            android:layout_weight="1"
+            android:text="@string/clickHereButton" />
+
+        <CheckBox
+            android:id="@+id/checkBox"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_gravity="fill"
+            android:layout_weight="1"
+            android:text="@string/checkBox" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <ImageButton
+            android:id="@+id/imageButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:scaleType="fitXY"
+            android:padding="0dp"
+            android:src="@drawable/flag" />
+
+        <Switch
+            android:id="@+id/sw"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="fill"
+            android:layout_weight="1"
+            android:text="@string/switchText" />
+
+    </LinearLayout>
+    <!--        https://stackoverflow.com/questions/11661288/android-text-input-type-person-name-isnt-working-->
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="textPersonName|textCapWords"
+        android:hint="@string/typeHere"
+        />
+
+</LinearLayout>
