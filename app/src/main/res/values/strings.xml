@@ -11,4 +11,16 @@
     <string name="snackOn">The switch is now on</string>
     <string name="snackOff">The switch is now off</string>
     <string name="undo">Undo</string>
+
+
+    <string name="typeEmail">Type email here</string>
+    <string name="enterPassword">Type your password:</string>
+    <string name="enterEmail">Enter your email address:</string>
+    <string name="login">LOGIN</string>
+    <string name="profile">Your profile</string>
+    <string name="yourName">Your name:</string>
+    <string name="enterName">Enter your name</string>
+    <string name="yourEmail">Your email:</string>
+    <string name="yourPicture">Your picture:</string>
+    <string name="clickAbove">Click the button above to take a picture</string>
 </resources>

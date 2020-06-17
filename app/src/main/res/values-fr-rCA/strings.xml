@@ -12,4 +12,15 @@
     <string name="snackOn">L\'interrupteur est maintenant activé.</string>
     <string name="snackOff">L\'interrupteur est maintenant désactivé.</string>
     <string name="undo">Annuler</string>
+
+    <string name="typeEmail">Saisissez votre e-mail ici</string>
+    <string name="enterPassword">Tapez votre mot de passe:</string>
+    <string name="enterEmail">Entrez votre adresse email:</string>
+    <string name="login">S\'IDENTIFIER</string>
+    <string name="profile">Votre profil</string>
+    <string name="yourName">Votre nom:</string>
+    <string name="enterName">Entrez votre nom</string>
+    <string name="yourEmail">Votre email:</string>
+    <string name="yourPicture">Ta photo:</string>
+    <string name="clickAbove">Cliquez sur le bouton ci-dessus pour prendre une photo</string>
 </resources>

@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/profile"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/profile" />
+
+    <TextView
+        android:id="@+id/name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/yourName" />
+
+    <EditText
+        android:id="@+id/enterName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/enterName"
+        android:inputType="textEmailAddress" />
+
+    <TextView
+        android:id="@+id/enterEmailTextView2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/yourEmail" />
+
+    <EditText
+        android:id="@+id/enterEmailEditText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/typeEmail"
+        android:inputType="textEmailAddress" />
+
+    <TextView
+        android:id="@+id/pictureTextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/yourPicture" />
+
+    <ImageButton
+        android:id="@+id/pictureButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:src="@android:drawable/picture_frame" />
+
+    <TextView
+        android:id="@+id/clickButtonText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/clickAbove" />
+
+</LinearLayout>
