@@ -2,41 +2,40 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:orientation="vertical"
-    android:layout_weight="1">
+    android:layout_weight="1"
+    android:orientation="vertical">
 
 
     <ListView
         android:id="@+id/listView"
         android:layout_width="fill_parent"
-        android:layout_height="wrap_content">
-    </ListView>
+        android:layout_height="wrap_content"></ListView>
 
     <LinearLayout
-        android:layout_alignParentBottom="true"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        >
+        android:layout_alignParentBottom="true"
+        android:orientation="horizontal">
 
         <Button
-            android:id="@+id/button3"
+            android:id="@+id/sendButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/receive" />
+            android:text="@string/send" />
 
         <EditText
             android:id="@+id/typeHere"
             android:layout_width="193dp"
+            android:inputType=""
             android:layout_height="wrap_content"
             android:hint="@string/typeHere" />
 
-
         <Button
-            android:id="@+id/button2"
+            android:id="@+id/receiveButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/send" />
+            android:text="@string/receive" />
+
 
     </LinearLayout>
 

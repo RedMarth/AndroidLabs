@@ -1,127 +1,69 @@
 package com.example.androidlabs;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.database.DataSetObserver;
 import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ListAdapter;
 import android.widget.ListView;
+
 import java.util.ArrayList;
+
 import android.view.LayoutInflater;
 import android.widget.TextView;
 
 public class ChatRoomActivity extends AppCompatActivity {
-    private ArrayList<String> elements = new ArrayList<>();
+    private ArrayList<Message> elements = new ArrayList<>();
     private MyListAdapter aListAdapter;
-//    private ListAdapter aListAdapter = new ListAdapter() {
-//
-//        @Override
-//        public boolean areAllItemsEnabled() {
-//            return false;
-//        }
-//
-//        @Override
-//        public boolean isEnabled(int position) {
-//            return false;
-//        }
-//
-//        @Override
-//        public void registerDataSetObserver(DataSetObserver observer) {
-//
-//        }
-//
-//        @Override
-//        public void unregisterDataSetObserver(DataSetObserver observer) {
-//
-//        }
-//
-//        @Override
-//        public int getCount() {
-//            return elements.size();
-//        }
-//
-//        @Override
-//        public Object getItem(int position) {
-//            return elements.get(position);
-//        }
-//
-//        @Override
-//        public long getItemId(int position) {
-//            return (long) position;
-//        }
-//
-//        @Override
-//        public boolean hasStableIds() {
-//            return false;
-//        }
-//
-//        @Override
-//        public View getView(int position, View old, ViewGroup parent) {
-//            View newView = old;
-//            LayoutInflater inflater = getLayoutInflater();
-//
-//            //make a new row:
-//            if(newView == null) {
-//                newView = inflater.inflate(R.layout.row_layout, parent, false);
-//            }
-//
-//            //set what the text should be for this row:
-//            TextView tView = newView.findViewById(R.id.textGoesHere);
-//            tView.setText(getItem(position).toString());
-//
-//            return newView;
-//        }
-//
-//        @Override
-//        public int getItemViewType(int position) {
-//            return 0;
-//        }
-//
-//        @Override
-//        public int getViewTypeCount() {
-//            return 0;
-//        }
-//
-//        @Override
-//        public boolean isEmpty() {
-//            return false;
-//        }
-//
-//    };
 
     private class MyListAdapter extends BaseAdapter {
 
-        public int getCount() { return elements.size(); }
+        public int getCount() {
+            return elements.size();
+        }
 
-        public Object getItem(int position) { return elements.get(position); }
+        public Message getItem(int position) {
+            return elements.get(position);
+        }
 
-        public long getItemId(int position) { return (long) position; }
+        public long getItemId(int position) {
+            return (long) position;
+        }
 
-        public View getView(int position, View old, ViewGroup parent)
-        {
-            View newView = old;
+
+        public View getView(int position, View old, ViewGroup parent) {
+            Message msg = (Message) getItem(position);
             LayoutInflater inflater = getLayoutInflater();
+            View newView;
 
-            //make a new row:
-            if(newView == null) {
-                newView = inflater.inflate(R.layout.row_layout, parent, false);
+            if (msg.isSend()) {
+                newView = inflater.inflate(R.layout.send_layout, parent, false);
+            } else newView = inflater.inflate(R.layout.receive_layout, parent, false);
 
-            }
             //set what the text should be for this row:
-            TextView tView = newView.findViewById(R.id.textGoesHere);
-            tView.setText( getItem(position).toString() );
+            TextView tView = (TextView) newView.findViewById(R.id.textGoesHere);
+            tView.setText(getItem(position).toString());
 
             //return it to be put in the table
             return newView;
         }
     }
 
-    private class Message{
+    private class Message {
         private String textMessage;
         private boolean isSend;
+
+        public Message(String textMessage, boolean isSend) {
+            this.textMessage = textMessage;
+            this.isSend = isSend;
+        }
 
         public String getTextMessage() {
             return textMessage;
@@ -138,6 +80,11 @@ public class ChatRoomActivity extends AppCompatActivity {
         public void setSend(boolean send) {
             isSend = send;
         }
+
+        @Override
+        public String toString() {
+            return textMessage;
+        }
     }
 
     @Override
@@ -146,9 +93,45 @@ public class ChatRoomActivity extends AppCompatActivity {
         setContentView(R.layout.activity_chat_room);
 
         ListView listView = (ListView) findViewById(R.id.listView);
+        Button send = findViewById(R.id.sendButton);
+        EditText typeMessage = findViewById(R.id.typeHere);
+        Button receive = findViewById(R.id.receiveButton);
 
         listView.setAdapter(aListAdapter = new MyListAdapter());
+        listView.setOnItemLongClickListener((parent, view, position, id) -> {
+            AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
+            alertDialogBuilder.setTitle("Do you want to delete this?");
 
+            //What is the message:
+            alertDialogBuilder.setMessage("The selected row is: " + position + "\n\nThe database id is: " + id);
 
+            //What the yes button does:
+            alertDialogBuilder.setPositiveButton("Yes", (click, arg) -> {
+                elements.remove(position);
+                aListAdapter.notifyDataSetChanged();
+            });
+
+            //What the No button does:
+            alertDialogBuilder.setNegativeButton("No", (click, arg) -> {
+
+            });
+
+            //Show the dialog:
+            alertDialogBuilder.create().show();
+
+        return true;
+        });
+
+        send.setOnClickListener((v) -> {
+            elements.add(new Message(typeMessage.getText().toString(), true));
+            aListAdapter.notifyDataSetChanged();
+            typeMessage.setText("");
+        });
+
+        receive.setOnClickListener((v) -> {
+            elements.add(new Message(typeMessage.getText().toString(), false));
+            aListAdapter.notifyDataSetChanged();
+            typeMessage.setText("");
+        });
     }
 }
