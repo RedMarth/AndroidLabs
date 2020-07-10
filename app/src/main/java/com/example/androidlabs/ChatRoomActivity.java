@@ -22,6 +22,7 @@ import android.widget.ListAdapter;
 import android.widget.ListView;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 import android.view.LayoutInflater;
 import android.widget.TextView;
@@ -118,7 +119,7 @@ public class ChatRoomActivity extends AppCompatActivity {
         //query all the results from the database:
         Cursor results = db.query(false, MyOpener.TABLE_NAME, columns, null, null, null, null, null, null);
 
-        printCursor(results, db.getVersion());
+
         //Now the results object has rows of results that match the query.
         //find the column indices:
         int messageColumnIndex = results.getColumnIndex(MyOpener.COL_MESSAGE);
@@ -136,6 +137,7 @@ public class ChatRoomActivity extends AppCompatActivity {
         }
 
         //At this point, the contactsList array has loaded every row from the cursor.
+        printCursor(results, db.getVersion());
     }
 
     protected void updateMessage(Message message) {
@@ -153,7 +155,13 @@ public class ChatRoomActivity extends AppCompatActivity {
     }
 
     protected void printCursor(Cursor c, int version) {
-        Log.v("Cursor Object", DatabaseUtils.dumpCursorToString(c));
+        if (c.moveToFirst()) {
+            Log.v("Version Number", String.valueOf(db.getVersion()));
+            Log.v("Cursor Number Columns", String.valueOf(c.getColumnCount()));
+            Log.v("Cursor Column Names", Arrays.toString(c.getColumnNames()));
+            Log.v("Cursor Number Rows", String.valueOf(c.getCount()));
+            Log.v("Cursor Object", DatabaseUtils.dumpCursorToString(c));
+        }
     }
 
 
