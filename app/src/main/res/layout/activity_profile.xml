@@ -4,20 +4,31 @@
     android:layout_height="fill_parent"
     android:orientation="vertical">
 
+    <androidx.wear.widget.BoxInsetLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_height="match_parent"
+        android:layout_width="match_parent"
+        android:padding="15dp"
+        >
+
     <TextView
         android:id="@+id/profile"
+        android:layout_gravity="center"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/profile" />
 
     <TextView
         android:id="@+id/name"
+        android:layout_gravity="center"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/yourName" />
 
     <EditText
         android:id="@+id/enterName"
+        android:layout_gravity="center"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="@string/enterName"
@@ -31,6 +42,7 @@
 
     <EditText
         android:id="@+id/enterEmailEditText"
+        android:layout_gravity="center"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="@string/typeEmail"
@@ -38,32 +50,39 @@
 
     <TextView
         android:id="@+id/pictureTextView"
+        android:layout_gravity="center"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/yourPicture" />
 
     <ImageButton
         android:id="@+id/pictureButton"
+        android:layout_gravity="center"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:src="@android:drawable/picture_frame" />
 
     <TextView
         android:id="@+id/clickButtonText"
+        android:layout_gravity="center"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/clickAbove" />
 
     <Button
         android:id="@+id/chatButton"
+        android:layout_gravity="center"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/chatButton" />
 
     <Button
         android:id="@+id/weatherButton"
+        android:layout_gravity="center"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/goWeather" />
+
+    </androidx.wear.widget.BoxInsetLayout>
 
 </LinearLayout>
