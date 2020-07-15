@@ -103,12 +103,21 @@ public class WeatherForecast extends AppCompatActivity {
                         if (xpp.getName().equals("temperature")) {
                             currentTemp = xpp.getAttributeValue(null, "value");
                             publishProgress(25, 50, 75);
+//                            publishProgress(25);
+//                            publishProgress(50);
+//                            publishProgress(75);
 
                             minTemp = xpp.getAttributeValue(null, "min");
                             publishProgress(25, 50, 75);
+//                            publishProgress(25);
+//                            publishProgress(50);
+//                            publishProgress(75);
 
                             maxTemp = xpp.getAttributeValue(null, "max");
                             publishProgress(25, 50, 75);
+//                            publishProgress(25);
+//                            publishProgress(50);
+//                            publishProgress(75);
 
                         } else if (xpp.getName().equals("weather")) {
                             icon = xpp.getAttributeValue(null, "icon");
@@ -124,7 +133,9 @@ public class WeatherForecast extends AppCompatActivity {
                 int responseCode = iconConnection.getResponseCode();
                 if (responseCode == 200) {
                     image = BitmapFactory.decodeStream(iconConnection.getInputStream());
-                    publishProgress(25, 50, 75);
+                    publishProgress(25);
+                    publishProgress(50);
+                    publishProgress(75);
 
                     FileOutputStream outputStream = openFileOutput(image + ".png", Context.MODE_PRIVATE);
                     image.compress(Bitmap.CompressFormat.PNG, 80, outputStream);
