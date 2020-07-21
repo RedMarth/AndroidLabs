@@ -5,10 +5,16 @@
     android:layout_weight="1"
     android:orientation="vertical">
 
+    <!-- The fragment will be loaded into this frame layout. The id is fragmentLocation -->
+    <FrameLayout
+        android:id="@+id/fragmentLocation"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_toRightOf="@id/listView"/>
 
     <ListView
         android:id="@+id/listView"
-        android:layout_width="fill_parent"
+        android:layout_width="300dp"
         android:layout_height="wrap_content"></ListView>
 
     <LinearLayout
@@ -25,7 +31,7 @@
 
         <EditText
             android:id="@+id/typeHere"
-            android:layout_width="193dp"
+            android:layout_width="120dp"
             android:inputType=""
             android:layout_height="wrap_content"
             android:hint="@string/typeHere" />

@@ -2,6 +2,9 @@ package com.example.androidlabs;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 import android.content.ContentValues;
 import android.content.Context;
@@ -34,11 +37,22 @@ public class ChatRoomActivity extends AppCompatActivity {
     int positionClicked = 0;
     private static int ACTIVITY_VIEW_MESSAGE = 33;
 
+    public static final String MESSAGE = "ITEM";
+    public static final String ITEM_POSITION = "POSITION";
+    public static final String ITEM_ID = "ID";
+    public static final String SEND_REC = "SEND";
+
+//    private AppCompatActivity parentActivity;
+
+    //ArrayList<String> source = new ArrayList<>(Arrays.asList("One", "Two", "Three", "Four"));
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chat_room);
+
+        boolean isTablet = findViewById(R.id.fragmentLocation) != null; //check if the FrameLayout is loaded
 
         Button send = findViewById(R.id.sendButton);
         Button receive = findViewById(R.id.receiveButton);
@@ -95,6 +109,16 @@ public class ChatRoomActivity extends AppCompatActivity {
                 elements.remove(position);
                 deleteMessage(message);
                 aListAdapter.notifyDataSetChanged();
+
+                //to remove the fragment from fragment layout
+                //from https://www.vogella.com/tutorials/AndroidFragments/article.html
+                // 4.2 handling dynamics in fragments. Saved my life
+                FragmentManager fm = getSupportFragmentManager();
+                Fragment fragment = fm.findFragmentById(R.id.fragmentLocation);
+                FragmentTransaction ft = fm.beginTransaction();
+                ft.remove(fragment);
+                ft.commit();
+//                getSupportFragmentManager().beginTransaction().remove(getViewById(R.id.fragmentLocation)).commit();
             });
 
             //What the No button does:
@@ -106,6 +130,32 @@ public class ChatRoomActivity extends AppCompatActivity {
             alertDialogBuilder.create().show();
 
             return true;
+        });
+
+        listView.setOnItemClickListener((list, item, position, id) -> {
+            //Create a bundle to pass data to the new fragment
+            Bundle dataToPass = new Bundle();
+            dataToPass.putString(MESSAGE, elements.get(position).getTextMessage() );
+            dataToPass.putInt(ITEM_POSITION, position);
+            dataToPass.putLong(ITEM_ID, id);
+            dataToPass.putInt(SEND_REC, elements.get(position).isSend());
+
+            if(isTablet)
+            {
+                DetailsFragment dFragment = new DetailsFragment(); //add a DetailFragment
+                dFragment.setArguments( dataToPass ); //pass it a bundle for information
+                getSupportFragmentManager()
+                        .beginTransaction()
+                        .replace(R.id.fragmentLocation, dFragment) //Add the fragment in FrameLayout
+                        .commit(); //actually load the fragment. Calls onCreate() in DetailFragment
+            }
+            else //isPhone
+            {
+                Intent nextActivity = new Intent(ChatRoomActivity.this, EmptyActivity.class);
+                nextActivity.putExtras(dataToPass); //send data to next activity
+                startActivity(nextActivity); //make the transition
+            }
+
         });
     }
 
@@ -280,30 +330,9 @@ public class ChatRoomActivity extends AppCompatActivity {
             //Create the new table:
             onCreate(db);
         }
-
     }
 
-//    private void getAll() {
-//        MyOpener dbHelper = new MyOpener(this);
-//        SQLiteDatabase db = dbHelper.getWritableDatabase();
-//
-//        String columns[] = {MyOpener.COL_ID, MyOpener.COL_MESSAGE, MyOpener.COL_SEND};
-//        Cursor c = db.query(false, MyOpener.TABLE_NAME, columns, null, null, null, null, null, null);
-//
-//        int msgColIndex = c.getColumnIndex(MyOpener.COL_MESSAGE);
-//        int sendColIndex = c.getColumnIndex(MyOpener.COL_SEND);
-//        int idColIndex = c.getColumnIndex(MyOpener.COL_ID);
-//
-//        //iterate over the results, return true if there is a next item:
-//        while (c.moveToNext()) {
-//            String name = c.getString(msgColIndex);
-//            boolean email = c.getInt(sendColIndex) == 1;
-//            long id = c.getLong(idColIndex);
-//
-//            //add the new Contact to the array list:
-//            elements.add(new Message(name, email, id));
-//        }
-//    }
+
 
 
 }

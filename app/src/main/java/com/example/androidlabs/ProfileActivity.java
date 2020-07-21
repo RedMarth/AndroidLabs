@@ -18,11 +18,14 @@ public class ProfileActivity extends AppCompatActivity {
     static final int REQUEST_IMAGE_CAPTURE = 1;
     public static final String ACTIVITY_NAME = "PROFILE_ACTIVITY";
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Log.e(ACTIVITY_NAME, "In function: onCreate");
         setContentView(R.layout.activity_profile);
+
+
 
         EditText emailEntry = findViewById(R.id.enterEmailEditText);
         mImageButton = findViewById(R.id.pictureButton);
